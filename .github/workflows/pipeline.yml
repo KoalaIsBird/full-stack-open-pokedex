@@ -6,6 +6,7 @@ on:
       - main
 
 jobs:
+
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
     steps:
@@ -22,3 +23,6 @@ jobs:
       - run: npm run build
 
       - run: npm run test
+
+      - name: Trigger deployment
+        run: https://api.render.com/deploy/srv-${{secrets.RENDER_SERVICE_ID}}?key=${{secrets.RENDER_API_KEY}}
