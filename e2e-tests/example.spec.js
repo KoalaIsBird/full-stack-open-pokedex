@@ -10,4 +10,12 @@ describe('Pokedex', () => {
       )
     ).toBeVisible()
   })
+
+  test('individual pokemon page opens correctly from main page', async ({
+    page,
+  }) => {
+    await page.goto('/')
+    await page.getByRole('link', { name: 'charmander' }).click()
+    await expect(page.getByText('blaze')).toBeVisible()
+  })
 })
