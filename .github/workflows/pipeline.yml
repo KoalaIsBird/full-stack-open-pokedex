@@ -10,7 +10,7 @@ on:
     types: [opened, synchronize]
 
 env:
-  TO_BE_SKIPPED: = ${{contains(github.event.head_commit.message, '#skip')}}
+  TO_BE_SKIPPED: ${{contains(github.event.head_commit.message, '#skip')}}
 
 jobs:
   simple_deployment_pipeline:
