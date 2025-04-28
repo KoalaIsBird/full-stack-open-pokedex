@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 5000
 app.use(express.static('dist'))
 
 app.get('/version', (req, res) => {
-  res.send('why is push on secondary branch running action??? I tried to remove the pull request and am going to push it to the secondary branch') // change this string to ensure a new version deployed
+  res.send('hi') // change this string to ensure a new version deployed
 })
 
 app.get('/health', (req, res) => {
