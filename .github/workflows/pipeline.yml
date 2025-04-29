@@ -24,10 +24,10 @@ jobs:
         run: npm install
       - name: Check app style
         run: npm run eslint
-      # - name: Build
-      #   run: npm run build
-      # - name: Test
-      #   run: npm run test
+      - name: Build
+        run: npm run build
+      - name: Test
+        run: npm run test
       - name: Trigger deployment
         if: ${{ (github.event_name == 'push') && !(contains(github.event.head_commit.message, '#skip')) }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
