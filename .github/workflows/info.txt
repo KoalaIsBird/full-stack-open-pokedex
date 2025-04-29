@@ -1,0 +1,1 @@
+hello.yml and playwright.yml have been moved to the repo root because they are annoying
