@@ -44,16 +44,16 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: 'The project {{ EVENT_PAYLOAD.push }} {{ EVENT_PAYLOAD.repository }} has been broken.'
+          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been broken in the following commit: ${{github.event.head_commit.url}}'
 
       - name: Discord notification deploy
+         
         if: ${{ success() && (github.event_name == 'push') && !(contains(github.event.head_commit.message, '#skip')) }}
         env:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
           args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
-
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
