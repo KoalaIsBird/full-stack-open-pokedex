@@ -33,7 +33,7 @@ jobs:
 
       - name: Test
         run: npm run test
-      
+
       - name: Trigger deployment
         if: ${{ (github.event_name == 'push') && !(contains(github.event.head_commit.message, '#skip')) }}
         run: curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.RENDER_API_KEY }}
@@ -44,7 +44,7 @@ jobs:
           DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
         uses: Ilshidur/action-discord@master
         with:
-          args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been broken.'
+          args: 'The project {{ EVENT_PAYLOAD.push }} {{ EVENT_PAYLOAD.repository }} has been broken.'
 
       - name: Discord notification deploy
         if: ${{ success() && (github.event_name == 'push') && !(contains(github.event.head_commit.message, '#skip')) }}
@@ -53,7 +53,7 @@ jobs:
         uses: Ilshidur/action-discord@master
         with:
           args: 'The project {{ EVENT_PAYLOAD.repository.full_name }} has been deployed.'
-    
+
   tag_release:
     needs: [simple_deployment_pipeline]
     runs-on: ubuntu-latest
